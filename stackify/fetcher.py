@@ -2,9 +2,10 @@ import requests
 import json
 import time
 
-KEY = ""
-URL_TEMPLATE="https://api.stackexchange.com/2.2/questions?pagesize=100&page={}&fromdate={}&order=desc&sort=creation&site=stackoverflow&key={}"
+from config import load_config
 
+URL_TEMPLATE="https://api.stackexchange.com/2.2/questions?pagesize=100&page={}&fromdate={}&order=desc&sort=creation&site=stackoverflow&key={}"
+KEY = load_config()["stackoverflow_key"]
 
 def get_last_time():
     with open("config.txt") as f:

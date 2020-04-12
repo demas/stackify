@@ -11,6 +11,7 @@ def load_config():
     if not config_file.exists():
         default_config = {
             "hide_tags": HIDE_TAGS,
+            "stackoverflow_key": "",
         }
         with open(CONFIG_FILENAME, "w") as f:
             yaml.dump(default_config, f)
