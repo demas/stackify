@@ -1,34 +1,16 @@
 import requests
 import json
 import time
-
-from config import load_config
+import config
 
 URL_TEMPLATE="https://api.stackexchange.com/2.2/questions?pagesize=100&page={}&fromdate={}&order=desc&sort=creation&site=stackoverflow&key={}"
-KEY = load_config()["stackoverflow_key"]
-
-def get_last_time():
-    with open("config.txt") as f:
-        content = f.readline()
-
-    # last sync time
-    if content != "":
-        return int(content)
-    else:
-        print("config not found")
-        return int(time.time())
-
-
-def save_last_time(moment):
-    file = open("config.txt", "w")
-    file.write(str(moment))
-    file.close()
+KEY = config.load_config()["stackoverflow_key"]
 
 
 def fetch():
     print()
     print("fetching data...")
-    last = get_last_time()
+    last = config.load_config()["last-sync"]
     now = int(time.time())
 
     first = True
@@ -50,5 +32,5 @@ def fetch():
         first = False
         page = page + 1
 
-    save_last_time(now)
+    config.set_value("last-sync", now)
     return result

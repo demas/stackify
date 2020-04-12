@@ -1,3 +1,4 @@
 .idea/
 data.db
 __pycache__
+config.yaml
