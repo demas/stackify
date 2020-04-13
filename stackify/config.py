@@ -13,7 +13,8 @@ def load_config():
         default_config = {
             "hide_tags": HIDE_TAGS,
             "stackoverflow_key": "",
-            "last-sync": int(time.time())
+            "last-sync": int(time.time()),
+            "timezone": 3,
         }
         with open(CONFIG_FILENAME, "w") as f:
             yaml.dump(default_config, f)
