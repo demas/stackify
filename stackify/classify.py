@@ -43,7 +43,7 @@ STOP_TAGS = ["php", "django", "cuda", "ionic2", "ionic-framework", "cordova", "w
 	"gradle", "haxe", "xamarin.android", "vhdl", "vue-tables-2", "typo3", "laravel-6", "apache-spark", "pyspark",
 	"couchbase", "django-templates", "retrofit", "opengl", "angular7", "symphony4", "access-vba", "terraform",
 	"sharepoint-online", "google-drive-api", "clojurescript", "cucumber", "vmware","apache-flink", "scrapy",
-	"pymongo", "mlflow", "beautifulsoup"]
+	"pymongo", "mlflow", "beautifulsoup", "gekko"]
 
 HIDE_TAGS = ["none", "ios", "machine-learning", "azure", "mongodb", "sql-server", "web", "java", "fsharp",
 					 "clojure", "business-intelligence", "kafka", "ansible"]

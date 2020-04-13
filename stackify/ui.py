@@ -1,4 +1,8 @@
+from datetime import datetime, timedelta
+
 from fabulous.color import fg256
+
+from config import load_config
 
 SHOW_LINK_TO_QUESTION = False
 
@@ -20,8 +24,11 @@ def display_list_of_questions(questions):
     print()
     num = 1
     for q in questions:
+        creation_date = (datetime.utcfromtimestamp(q["creation_date"]) +
+                         timedelta(hours=load_config()["timezone"])).strftime('%Y-%m-%d %H:%M:%S')
         print(fg256("yellow", num) + ": " + fg256("lightgreen", q["title"]))
-        print(fg256("lightyellow", "  {}, score {}, answer_count {}".format(q["tags"], q["score"], q["answer_count"])))
+        print(fg256("lightyellow", "  {}, {}, score {}, answer_count {}".format(q["tags"], creation_date,
+                                                                               q["score"], q["answer_count"])))
         if SHOW_LINK_TO_QUESTION:
             print(fg256("grey", "  {}".format(q["link"])))
         print()
