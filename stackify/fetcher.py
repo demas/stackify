@@ -1,6 +1,9 @@
 import requests
 import json
 import time
+
+from fabulous.color import fg256
+
 import config
 
 URL_TEMPLATE="https://api.stackexchange.com/2.2/questions?pagesize=100&page={}&fromdate={}&order=desc&sort=creation&site=stackoverflow&key={}"
@@ -33,4 +36,5 @@ def fetch():
         page = page + 1
 
     config.set_value("last-sync", now)
+    print(fg256("grey", "synced pages = {}; remain_quota = {})".format(page - 1, json_data["quota_remaining"])))
     return result
