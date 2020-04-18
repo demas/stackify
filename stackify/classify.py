@@ -43,14 +43,17 @@ STOP_TAGS = ["php", "django", "cuda", "ionic2", "ionic-framework", "cordova", "w
 	"gradle", "haxe", "xamarin.android", "vhdl", "vue-tables-2", "typo3", "laravel-6", "apache-spark", "pyspark",
 	"couchbase", "django-templates", "retrofit", "opengl", "angular7", "symphony4", "access-vba", "terraform",
 	"sharepoint-online", "google-drive-api", "clojurescript", "cucumber", "vmware","apache-flink", "scrapy",
-	"pymongo", "mlflow", "beautifulsoup", "gekko"]
+	"pymongo", "mlflow", "beautifulsoup", "gekko", "oracle11g", "google-earth-engine", "xslt", "tortoisesvn", "draftjs",
+	"xmpp", "odoo1-12", "ldap", "jenkins", "gatsby", "iis", "raku", "paypal", "wso2", "hadoop", "linq", "notepad++",
+	"seo", "maximo", "spacy", "nestjs", "tableau", "codeigniter", "prolog", "drake", "hololens", "drupal", "heatmap",
+	"vtk", "amazon-ec2", "boto3", "sublimetext"]
 
 HIDE_TAGS = ["none", "ios", "machine-learning", "azure", "mongodb", "sql-server", "web", "java", "fsharp",
 					 "clojure", "business-intelligence", "kafka", "ansible"]
 
 MACHINE_LEARNING_TAGS = ["machine-learning","anaconda","tensorflow","nltk","pandas","classification","keras",
 						 "numpy","pytorch","classification","adaboost","matplotlib","scikit-learn","deep-learning",
-						 "reinforcement-learning"]
+						 "reinforcement-learning", "dataframe"]
 AZURE_TAGS = ["azure","azure-functions","azure-data-studio","azureservicebus","azure-devops","azure-web-sites",
 			  "azure-storage"]
 JAVA_TAGS = ["spring","spring-boot","java","java-8","tomcat"]
