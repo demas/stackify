@@ -1,6 +1,13 @@
 from typing import List
 
 
+class ActiveSession:
+    def __new__(cls):
+        if not hasattr(cls, "instance"):
+            cls.instance = Session()
+        return cls.instance
+
+
 class Session:
     def __init__(self):
         self.all_questions = []

@@ -16,8 +16,11 @@ class Command:
 
 
 class Parser:
-    def __init__(self):
-        self.commands: List[Command] = []
+    def __init__(self, commands: List[Command] = None):
+        if commands:
+            self.commands = commands
+        else:
+            self.commands: List[Command] = []
 
     def add_command(self, command: Command) -> None:
         self.commands.append(command)
