@@ -1,5 +1,7 @@
 from typing import List, Dict
 
+from store import Connection
+
 
 def transform_tags(tag_counts: Dict[str, int]) -> List[Dict[str, int]]:
     return [{"tag": tag, "count": count} for (tag, count) in tag_counts.items()]
@@ -12,6 +14,15 @@ def filter_tags(tags: List[Dict[str, int]], dont_display_tags: List[str]) -> Lis
 def set_hidden(tags: List[Dict[str, int]], dont_display_tags: List[str]) -> List[Dict[str, int]]:
     def set_in_tag(tag: Dict[str, int]) -> Dict[str, int]:
         tag["hidden"] = tag["tag"] in dont_display_tags
+        return tag
+
+    return list(map(set_in_tag, tags))
+
+
+# TODO: test for this function
+def set_new(tags: List[Dict[str, int]]) -> List[Dict[str, int]]:
+    def set_in_tag(tag: Dict[str, int]) -> Dict[str, int]:
+        tag["new_count"] = Connection().new_count_by_tag(tag["tag"], 1 * 60 * 60)  # TODO: settings
         return tag
 
     return list(map(set_in_tag, tags))

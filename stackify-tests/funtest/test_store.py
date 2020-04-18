@@ -1,5 +1,6 @@
 import random
 import string
+from unittest import mock
 
 from store import Connection, DB
 
@@ -67,6 +68,24 @@ def test_remove_by_tag(testing_database: DB, list_of_classified_questions):
 
     questions_by_tag = testing_database.tag("js")
     assert len(questions_by_tag) == 0
+
+
+@mock.patch("time.time", autospec=True)
+def test_get_new_count_by_tag(time, testing_database: DB, question_1, question_2, question_3):
+    time.return_value = 4
+    # TODO: add fabrica
+    question_1["creation_date"] = 1
+    question_2["creation_date"] = 2
+    question_3["creation_date"] = 3
+    question_1["first"] = "a"
+    question_2["first"] = "a"
+    question_3["first"] = "a"
+    testing_database.add(question_1)
+    testing_database.add(question_2)
+    testing_database.add(question_3)
+
+    result = testing_database.new_count_by_tag(tag="a", seconds=1)
+    assert result == 1
 
 
 def test_connection():

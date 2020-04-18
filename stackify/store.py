@@ -1,3 +1,5 @@
+import time
+
 import pickledb
 
 
@@ -62,3 +64,8 @@ class DB:
         self.db.set("f:" + tag, [])
         self.db.dadd("counts", (tag, 0))
         self.db.dump()
+
+    def new_count_by_tag(self, tag: str, seconds: int) -> int:
+        limit = int(time.time()) - seconds
+        new_questions = list(filter(lambda q: q["creation_date"] >= limit, self.tag(tag)))
+        return len(new_questions)

@@ -31,6 +31,7 @@ def ls_action(include_hidden=False):
         tags = helpers.filter_tags(tags, config['hide_tags'])
 
     helpers.set_hidden(tags, config['hide_tags'])
+    helpers.set_new(tags)
     tags = helpers.enrich_tags(tags)
     ActiveSession().current_tags = tags
     ui.ls(tags)

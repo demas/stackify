@@ -17,7 +17,8 @@ def ls(data_to_display):
     print()
     for element in data_to_display:
         color = "lightgreen" if not element["hidden"] else "red"
-        print(fg256(color, "{}: {} ({})".format(element["num"], element["tag"], element["count"])))
+        print(fg256(color, "{}: {} ({} / {})".format(element["num"], element["tag"], element["new_count"],
+                                                     element["count"])))
 
 
 def display_list_of_questions(questions):
