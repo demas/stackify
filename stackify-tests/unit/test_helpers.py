@@ -35,7 +35,7 @@ def test_filter_tags_with_zero_counts():
     assert result[1] == {"tag": "b", "count": 2}
 
 
-def test_set_hidden():
+def test_set_hidden_one_tag():
     tags = [{"tag": "a", "count": 1}, {"tag": "b", "count": 2}, {"tag": "c", "count": 3}]
     dont_display_tags = ["c"]
 
@@ -44,6 +44,18 @@ def test_set_hidden():
     assert len(result) == 3
     assert result[0] == {"tag": "a", "count": 1, "hidden": False}
     assert result[1] == {"tag": "b", "count": 2, "hidden": False}
+    assert result[2] == {"tag": "c", "count": 3, "hidden": True}
+
+
+def test_set_hidden_multiple_tags():
+    tags = [{"tag": "a", "count": 1}, {"tag": "b", "count": 2}, {"tag": "c", "count": 3}]
+    dont_display_tags = ["b", "c"]
+
+    result = set_hidden(tags, dont_display_tags)
+
+    assert len(result) == 3
+    assert result[0] == {"tag": "a", "count": 1, "hidden": False}
+    assert result[1] == {"tag": "b", "count": 2, "hidden": True}
     assert result[2] == {"tag": "c", "count": 3, "hidden": True}
 
 
