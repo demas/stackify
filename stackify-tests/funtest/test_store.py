@@ -1,4 +1,7 @@
-from store import DB
+import random
+import string
+
+from store import Connection, DB
 
 
 def test_add_question(testing_database: DB, question_1):
@@ -64,3 +67,22 @@ def test_remove_by_tag(testing_database: DB, list_of_classified_questions):
 
     questions_by_tag = testing_database.tag("js")
     assert len(questions_by_tag) == 0
+
+
+def test_connection():
+    filename = ''.join([random.choice(string.ascii_lowercase) for _ in range(15)])
+    connection = Connection(filename=filename)
+
+    assert connection is not None
+    assert isinstance(connection, DB)
+
+
+def test_connection_singleton():
+    filename = ''.join([random.choice(string.ascii_lowercase) for _ in range(15)])
+    connection1 = Connection(filename=filename)
+    connection2 = Connection(filename=filename)
+
+    assert connection1 is not None
+    assert connection2 is not None
+    assert id(connection1) == id(connection2)
+    assert id(connection1.db) == id(connection2.db)

@@ -1,12 +1,17 @@
 import pickledb
 
 
-def get_database():
-    return DB(pickledb.load("data.db", False))
+class Connection:
+    def __new__(cls, filename="data.db"):
+        if not hasattr(cls, "instance"):
+            db = pickledb.load(filename, False)
+            cls.instance = DB(db)
+        return cls.instance
 
 
 class DB:
     def __init__(self, db):
+        print("db loaded")
         self.db = db
 
     def counts(self):
