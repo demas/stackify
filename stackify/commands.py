@@ -1,4 +1,5 @@
 import webbrowser
+from typing import Optional
 
 from fabulous.color import fg256
 
@@ -46,16 +47,23 @@ def show_questions_by_tag(params=None):
     ls_action(include_hidden=("--include-hidden" in params))
 
 
-def show_questions(params=None):
-    if helpers.represents_int(params):
-        num = int(params)
+# TODO: test for it
+def _tag_name(param: str) -> Optional[str]:
+    if helpers.represents_int(param):
+        num = int(param)
         for tag_dict in ActiveSession().current_tags:
             if tag_dict["num"] == num:
-                ActiveSession().switch_to_tag(tag_dict["tag"], store.Connection().tag(tag_dict["tag"]))
-                ui.display_list_of_questions(ActiveSession().active_questions)
+                return tag_dict["tag"]
     else:
-        ActiveSession().switch_to_tag(params, store.Connection().tag(params))
-        ui.display_list_of_questions(ActiveSession().active_questions)
+        return param
+
+
+def show_questions(params=None):
+    tag_name = _tag_name(params)
+    questions = store.Connection().tag(tag_name)
+    questions = helpers.add_new_header_for_questions(questions)
+    ActiveSession().switch_to_tag(params, questions)
+    ui.display_list_of_questions(ActiveSession().active_questions)
 
 
 def delete_questions(params=None):
