@@ -60,7 +60,7 @@ def _tag_name(param: str) -> Optional[str]:
 
 def show_questions(params=None):
     tag_name = _tag_name(params)
-    ActiveSession().switch_to_tag(params, store.Connection().tag(tag_name))
+    ActiveSession().switch_to_tag(tag_name, store.Connection().tag(tag_name))
     active_questions = ActiveSession().active_questions
     active_questions = helpers.add_new_header_for_questions(active_questions)
     active_questions = helpers.fix_question_title(active_questions)
