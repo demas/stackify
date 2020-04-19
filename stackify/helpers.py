@@ -56,3 +56,16 @@ def add_new_header_for_questions(questions: List[Dict]) -> List[Dict]:
         question["new_flag"] = question["creation_date"] >= limit
         result.append(question)
     return result
+
+
+# TODO: test
+# TODO: optimize
+def fix_question_title(questions: List[Dict]) -> List[Dict]:
+    result = []
+    for question in questions:
+        question["title"] = question["title"].replace("&quot;", "\"")
+        question["title"] = question["title"].replace("&#39;", "\'")
+        question["title"] = question["title"].replace("&lt;", "<")
+        question["title"] = question["title"].replace("&gt;", ">")
+        result.append(question)
+    return result
