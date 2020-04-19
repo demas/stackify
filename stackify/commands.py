@@ -60,10 +60,11 @@ def _tag_name(param: str) -> Optional[str]:
 
 def show_questions(params=None):
     tag_name = _tag_name(params)
-    questions = store.Connection().tag(tag_name)
-    questions = helpers.add_new_header_for_questions(questions)
-    ActiveSession().switch_to_tag(params, questions)
-    ui.display_list_of_questions(ActiveSession().active_questions)
+    ActiveSession().switch_to_tag(params, store.Connection().tag(tag_name))
+    active_questions = ActiveSession().active_questions
+    active_questions = helpers.add_new_header_for_questions(active_questions)
+    active_questions = helpers.fix_question_title(active_questions)
+    ui.display_list_of_questions(active_questions)
 
 
 def delete_questions(params=None):
