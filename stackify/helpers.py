@@ -1,3 +1,4 @@
+import time
 from typing import List, Dict
 
 from store import Connection
@@ -44,3 +45,14 @@ def represents_int(s: str) -> bool:
         return True
     except ValueError:
         return False
+
+
+# TODO: test
+# TODO: optimize
+def add_new_header_for_questions(questions: List[Dict]) -> List[Dict]:
+    result = []
+    limit = int(time.time()) - 1 * 60 * 60 # TODO: settings
+    for question in questions:
+        question["new_flag"] = question["creation_date"] >= limit
+        result.append(question)
+    return result

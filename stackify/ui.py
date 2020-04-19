@@ -27,7 +27,13 @@ def display_list_of_questions(questions):
     for q in questions:
         creation_date = (datetime.utcfromtimestamp(q["creation_date"]) +
                          timedelta(hours=load_config()["timezone"])).strftime('%Y-%m-%d %H:%M:%S')
-        print(fg256("yellow", num) + ": " + fg256("lightgreen", q["title"]))
+        new_flag_ui = ""
+        if q["new_flag"]:
+            new_flag_ui = "[new] "
+
+        print(fg256("yellow", num) + ": " +
+              fg256("lightcoral", new_flag_ui) +
+              fg256("lightgreen", q["title"]))
         print(fg256("lightyellow", "  {}, {}, score {}, answer_count {}".format(q["tags"], creation_date,
                                                                                q["score"], q["answer_count"])))
         if SHOW_LINK_TO_QUESTION:
