@@ -69,3 +69,9 @@ def fix_question_title(questions: List[Dict]) -> List[Dict]:
         question["title"] = question["title"].replace("&gt;", ">")
         result.append(question)
     return result
+
+
+# TODO: test
+def filter_active_questions(questions: List[Dict]) -> List[Dict]:
+    return list(filter(lambda q: q["new_flag"], questions))
+
