@@ -45,5 +45,5 @@ def display_list_of_questions(questions):
 def alert_unclassified(questions):
     for q in questions:
         if q["first"] == "none":
-            print(fg256('gray', "{}".format(q["tags"])))
+            print(fg256('gray', "{}: {}".format(q["site"], q["tags"])))
 

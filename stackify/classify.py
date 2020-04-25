@@ -16,7 +16,7 @@ DOTNET_TAGS = ["winforms", ".net-core", "entity-framework-core", "wpf", "uwp", "
                "entity-framework", "linq", "autofac", "entity-framework-6", "blazor", "wcf", "visual-studio-2010",
                "razor-pages", "visual-studio-2017", "ef-core-3.1", ".net-core-3.1", "entity-framework-5"]
 ANDROID_TAGS = ["android-studio", "retrofit", "android", "android-intent","android-service", "android-recyclerview",
-                "android-layout", "android-webview", "genymotion", "android-databinding", "androidx",
+                "android-layout", "android-webview", "genymotion", "android-databinding", "androidx", "android-10.0",
                 "android-camera2", "android-fragments", "android-security", "android-studio-3.6", "android-room"]
 DJANGO_TAGS = ["django", "django-templates", "django-models", "django-apps", "django-rest-framework",
                "django-channels", "django-migrations"]
@@ -119,6 +119,8 @@ STOP_TAGS = ["cuda", "ionic2", "ionic-framework", "cordova", "mysql", "forms", "
              "vtk", "amazon-ec2", "boto3", "sublimetext", "vaadin", "emacs", "opencart", "pdftk",
              "activemq-artemis", "artemis", "appium", "carrierwave", "dplyr", "vert.x", "activitypub",
              "prestashop", "windows-defender", "r-markdown", "asciidoctor", "azerothcore",
+             "jooq", "codenameone", "wolfram-mathematica","yahoo-api", "bbedit", "activecollab",
+             "getorgchart", "liquibase",
              "sublimetext3", "roblox", "luis", "marklogic", "word-addins", "eclipse-rcp", "jitter"]
 
 STOP_TAGS = STOP_TAGS + PHP_TAGS + JS_TAGS + DOTNET_TAGS + ANDROID_TAGS + DJANGO_TAGS + AMAZON_TAGS + GOOGLE_TAGS + \
@@ -194,6 +196,12 @@ FIRST_LEVEL_RULES = [
     {"site": "stackoverflow", "include": "markdown", "result": "markdown"},
     {"site": "stackoverflow", "include": "grafana", "result": "grafana"},
     {"site": "stackoverflow", "include": "nginx", "result": "nginx"},
+
+    {"site": "codereview", "include": "python", "result": "cr: python"},
+    {"site": "codereview", "include": "c++", "result": "cr: c++"},
+    {"site": "codereview", "include": "go", "result": "cr: go"},
+
+    {"site": "apple", "include": "*", "result": "s: apple"},
 ]
 
 SECOND_LEVEL_RULES = [
@@ -213,15 +221,14 @@ class Classifier:
                 return True
         return False
 
-    def first_level_classification(self, tags: List[str]) -> Optional[str]:
+    def first_level_classification(self, tags: List[str], site: str) -> Optional[str]:
         for rule in self.first_level_rules:
-            if rule["include"] == "*":
+            if rule["site"] == site and rule["include"] == "*":
                 return rule["result"]
-            else:
+            elif rule["site"] == site:
                 for rule_tag in rule["include"].split(","):
                     if rule_tag in tags:
                         return rule["result"]
-
         return "none"
 
     def second_level_classification(self, tags: List[str], first: str) -> Optional[str]:
@@ -231,11 +238,11 @@ class Classifier:
 
         return "none"
 
-    def classify(self, questions):
+    def classify(self, questions: List) -> List:
         result = []
         for q in questions:
             if not self.has_stop_tag(q["tags"]):
-                q["first"] = self.first_level_classification(q["tags"])
+                q["first"] = self.first_level_classification(q["tags"], q["site"])
                 q["second"] = self.second_level_classification(q["tags"], q["first"])
                 result.append(q)
         return result

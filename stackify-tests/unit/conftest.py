@@ -9,6 +9,10 @@ FIRST_LEVEL_RULES = [
     {"site": "site_a", "include": "b", "result": "result_2"},
     {"site": "site_a", "include": "c", "result": "result_2"},
     {"site": "site_a", "include": "d,e,f", "result": "result_3"},
+    {"site": "site_b", "include": "x", "result": "result_4"},
+    {"site": "site_b", "include": "y,z", "result": "result_6"},
+    {"site": "site_b", "include": "a", "result": "result_7"},
+    {"site": "site_b", "include": "*", "result": "result_5"},
 ]
 
 
