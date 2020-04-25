@@ -4,17 +4,17 @@ PHP_TAGS = ["php", "laravel", "joomla", "cakephp", "wordpress", "symfony", "lara
             "laravel-6", "drupal-8", "php-curl", "typo3-8.x", "codeigniter", "drupal", "yii2", "odoo-12",
             "laravel-7", "magento", "magento-2.3", "lavarel-5.7", "magento2", "drupal-7", "symfony-3.4",
             "odoo-13", "typo3-9.x", "php-7.4", "symfony4", "umbraco", "yii", "composer-php", "phpexcel",
-            "zend-framework"]
+            "zend-framework", "phpspreadsheet"]
 JS_TAGS = ["javascript", "knockout.js", "d3.js", "ember.js", "three.js", "backbone.js", "angular3", "angular4",
            "angular5", "mocha", "chai", "webpack", "eslint", "redux", "underscore.js", "vue.js", "vuejs2", "svelve",
            "angularjs", "reactjs", "node.js", "handlebars.js", "extjs", "gruntjs", "express", "mongoose", "angular8",
            "angular9", "koa", "fabricjs", "angular-cli", "rxjs", "sequelize.js", "react-hooks", "discord.js",
            "react.js", "svelve-3", "konvajs", "npm-install", "angular-material", "requirejs", "pdfjs", "npm",
            "nuxt.js", "svelve", "vuejs-datepicker", "angular6", "scala.js", "vue-components", "jquery-ui",
-           "momentjs"]
+           "momentjs", "vue-component"]
 DOTNET_TAGS = ["winforms", ".net-core", "entity-framework-core", "wpf", "uwp", "signalr", "visual-studio-code",
                "entity-framework", "linq", "autofac", "entity-framework-6", "blazor", "wcf", "visual-studio-2010",
-               "razor-pages", "visual-studio-2017", "ef-core-3.1", ".net-core-3.1"]
+               "razor-pages", "visual-studio-2017", "ef-core-3.1", ".net-core-3.1", "entity-framework-5"]
 ANDROID_TAGS = ["android-studio", "retrofit", "android", "android-intent","android-service", "android-recyclerview",
                 "android-layout", "android-webview", "genymotion", "android-databinding", "androidx",
                 "android-camera2", "android-fragments", "android-security", "android-studio-3.6", "android-room"]
@@ -22,7 +22,7 @@ DJANGO_TAGS = ["django", "django-templates", "django-models", "django-apps", "dj
                "django-channels", "django-migrations"]
 AMAZON_TAGS = ["amazon-redshift", "aurelia", "amazon-web-services", "amazon-elastic-beanstalk", "amazon-rds",
                "amazon-dynamodb", "amazon-cloudformation", "amazon-echo", "amazon-sagemaker", "amazon-cloudwatch",
-               "aws-fargate", "amazon-athena", "aws-java-sdk"]
+               "aws-fargate", "amazon-athena", "aws-java-sdk", "amazon-cloudfront"]
 GOOGLE_TAGS = ["google-apps-script", "google-maps", "google-apps-script", "google-maps-markers", "google-cloud-storage",
                "google-sheets", "google-analytics", "google-search-console", "google-earth-engine", "google-drive-api",
                "google-spreadsheet", "youtube-iframe-api", "google-kubernetes-engine", "google-sheets-formula",
@@ -64,7 +64,7 @@ STOP_TAGS = ["cuda", "ionic2", "ionic-framework", "cordova", "mysql", "forms", "
              "pdfkit", "oracle-data-integrator", "rstudio", "blender", "coq", "slim4", "mqtt", "mailgun", "openam",
              "ffmpeg", "dreamfactory", "ms-access", "wso2esb", "ms-access-2013", "cygwin", "adobe-indesign",
              "picturefill", "lotus-notes", "ionic4", "google-finance", "react-native-android", "3dsmax",
-             "microsoft-edge", "apache-camel", "cplex", "apache-nifi", "evernote", "inno-setup",
+             "microsoft-edge", "apache-camel", "cplex", "apache-nifi", "evernote", "inno-setup", "dialogflow",
              "ruby-on-rails-4", "slider", "plotly", "owl-carousel", "vis.js", "tizen", "geoserver", "mapbox", "froala",
              "navision", "bots", "telegram-bot", "office-js", "kong", "guile", "chromecast", "xsl-fo",
              "dropbox-api", "mono", "hangfire", "vsix", "exchange-server", "sharepoint-2013", "flux", "webforms",
@@ -117,6 +117,8 @@ STOP_TAGS = ["cuda", "ionic2", "ionic-framework", "cordova", "mysql", "forms", "
              "notepad++", "dtd", "websphere", "oracle-xe", "common-lisp", "bison", "qgis", "kusto",
              "seo", "maximo", "spacy", "nestjs", "tableau", "prolog", "drake", "hololens", "heatmap",
              "vtk", "amazon-ec2", "boto3", "sublimetext", "vaadin", "emacs", "opencart", "pdftk",
+             "activemq-artemis", "artemis", "appium", "carrierwave", "dplyr", "vert.x", "activitypub",
+             "prestashop", "windows-defender", "r-markdown", "asciidoctor", "azerothcore",
              "sublimetext3", "roblox", "luis", "marklogic", "word-addins", "eclipse-rcp", "jitter"]
 
 STOP_TAGS = STOP_TAGS + PHP_TAGS + JS_TAGS + DOTNET_TAGS + ANDROID_TAGS + DJANGO_TAGS + AMAZON_TAGS + GOOGLE_TAGS + \
@@ -133,13 +135,13 @@ AZURE_TAGS = ["azure", "azure-functions", "azure-data-studio", "azureservicebus"
               "azure-storage", "azure-data-factory", "azure-cosmosdb", "azure-notificationhub", "azure-keyvault",
               "azure-sql-database", "azure-security", "azure-cli", "azure-api-management", "azure-eventhub",
               "azure-data-lake", "azure-machine-learning-studio", "azure-web-app-service", "azure-application-insight",
-              "azure-logic-apps"]
+              "azure-logic-apps", "azure-active-directory", "azure-storage-blobs", "azure-blob-storage"]
 JAVA_TAGS = ["spring", "spring-boot", "java", "java-8", "tomcat", "spring-webflux", "maven", "jakarta-ee",
              "spring-batch", "spring-security", "spring-mvc", "tomcat7", "rx-java", "java-7", "spring-data-jpa",
-             "spring-boot-activator"]
+             "spring-boot-activator", "spring-data-redis"]
 ARCHITECTURE_TAGS = ["oop", "software-design", "architecture", "microservices", "distributed-system"]
 C_TAGS = ["c", "c++", "gcc", "c++11", "c++14"]
-IOS_TAGS = ["swift", "xcode", "swiftui", "ios", "swift3", "swift4", "combine", "swift5"]
+IOS_TAGS = ["swift", "xcode", "swiftui", "ios", "swift3", "swift4", "combine", "swift5", "apple-watch"]
 LINUX_TAGS = ["linux", "unix", "linux-kernel", "debian"]
 PYTHON_TAGS = ["python", "python-3.x", "python-3.8", "python-2.7", "pytest", "python-3.6", "python-3.7"]
 WEB_TAGS = ["css", "html", "html5-canvas", "bootstrap-4", "bootstrap-datepicker"]
