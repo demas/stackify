@@ -67,6 +67,17 @@ def show_questions(params=None):
     ui.display_list_of_questions(active_questions)
 
 
+def show_new_questions(params=None):
+    tag_name = _tag_name(params)
+    ActiveSession().switch_to_tag(tag_name, store.Connection().tag(tag_name))
+    active_questions = ActiveSession().active_questions
+    active_questions = helpers.add_new_header_for_questions(active_questions)
+    active_questions = helpers.fix_question_title(active_questions)
+    new_active_questions = helpers.filter_active_questions(active_questions)
+    ActiveSession().active_questions = new_active_questions
+    ui.display_list_of_questions(new_active_questions)
+
+
 def delete_questions(params=None):
     if len(params) == 0:
         store.Connection().set_by_tag(ActiveSession().last_used_tag, ActiveSession().remain_questions())
