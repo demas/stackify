@@ -17,7 +17,8 @@ DOTNET_TAGS = ["winforms", ".net-core", "entity-framework-core", "wpf", "uwp", "
                "razor-pages", "visual-studio-2017", "ef-core-3.1", ".net-core-3.1", "entity-framework-5"]
 ANDROID_TAGS = ["android-studio", "retrofit", "android", "android-intent","android-service", "android-recyclerview",
                 "android-layout", "android-webview", "genymotion", "android-databinding", "androidx", "android-10.0",
-                "android-camera2", "android-fragments", "android-security", "android-studio-3.6", "android-room"]
+                "android-camera2", "android-fragments", "android-security", "android-studio-3.6", "android-room",
+                "android-8.0-oreo"]
 DJANGO_TAGS = ["django", "django-templates", "django-models", "django-apps", "django-rest-framework",
                "django-channels", "django-migrations"]
 AMAZON_TAGS = ["amazon-redshift", "aurelia", "amazon-web-services", "amazon-elastic-beanstalk", "amazon-rds",
@@ -58,7 +59,7 @@ STOP_TAGS = ["cuda", "ionic2", "ionic-framework", "cordova", "mysql", "forms", "
              "openerp", "visual-c++", "wordpress-gutenberg", "bitcoin", "passport.js", "haproxy",
              "primeng", "nativescript", "ckeditor4.x", "pentaho", "postman", "mondrian", "instagram", "jspdf",
              "socialshare", "markojs", "jrecorder", "jenkins-pipeline", "modelica", "office-addins", "elisp",
-             "slack", "automapper-5", "unity2d", "polly", "excel-interop", "unity5", "sharppcap",
+             "slack", "automapper-5", "unity2d", "polly", "excel-interop", "unity5", "sharppcap", "gstreamer",
              "tibco-ems", "sonarqube", "netlogo", "webrtc", "gml", "excel-formula", "ada", "ada95",
              "heroku", "sails.js", "waterline", "certbot", "snapchat", "feathersjs", "orientdb", "ogg", "ibm-mq",
              "pdfkit", "oracle-data-integrator", "rstudio", "blender", "coq", "slim4", "mqtt", "mailgun", "openam",
@@ -120,7 +121,7 @@ STOP_TAGS = ["cuda", "ionic2", "ionic-framework", "cordova", "mysql", "forms", "
              "activemq-artemis", "artemis", "appium", "carrierwave", "dplyr", "vert.x", "activitypub",
              "prestashop", "windows-defender", "r-markdown", "asciidoctor", "azerothcore",
              "jooq", "codenameone", "wolfram-mathematica","yahoo-api", "bbedit", "activecollab",
-             "getorgchart", "liquibase",
+             "getorgchart", "liquibase", "maccatalyst", "fancybox-3", "fxcop", "oracle18c",
              "sublimetext3", "roblox", "luis", "marklogic", "word-addins", "eclipse-rcp", "jitter"]
 
 STOP_TAGS = STOP_TAGS + PHP_TAGS + JS_TAGS + DOTNET_TAGS + ANDROID_TAGS + DJANGO_TAGS + AMAZON_TAGS + GOOGLE_TAGS + \
@@ -140,7 +141,7 @@ AZURE_TAGS = ["azure", "azure-functions", "azure-data-studio", "azureservicebus"
               "azure-logic-apps", "azure-active-directory", "azure-storage-blobs", "azure-blob-storage"]
 JAVA_TAGS = ["spring", "spring-boot", "java", "java-8", "tomcat", "spring-webflux", "maven", "jakarta-ee",
              "spring-batch", "spring-security", "spring-mvc", "tomcat7", "rx-java", "java-7", "spring-data-jpa",
-             "spring-boot-activator", "spring-data-redis"]
+             "spring-boot-activator", "spring-data-redis", "spring-data"]
 ARCHITECTURE_TAGS = ["oop", "software-design", "architecture", "microservices", "distributed-system"]
 C_TAGS = ["c", "c++", "gcc", "c++11", "c++14"]
 IOS_TAGS = ["swift", "xcode", "swiftui", "ios", "swift3", "swift4", "combine", "swift5", "apple-watch"]
@@ -201,7 +202,7 @@ FIRST_LEVEL_RULES = [
     {"site": "codereview", "include": "c++", "result": "cr: c++"},
     {"site": "codereview", "include": "go", "result": "cr: go"},
 
-    {"site": "apple", "include": "*", "result": "s: apple"},
+    {"site": "askdifferent", "include": "*", "result": "s: apple"},
 ]
 
 SECOND_LEVEL_RULES = [

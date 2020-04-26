@@ -4,6 +4,10 @@ import pytest
 
 import helpers
 
+SECOND = 1
+MINUTE = 60 * SECOND
+HOUR = 60 * SECOND
+
 
 def test_transform_tags():
     tags = {"a": 1, "b": 2, "c": 3}
@@ -122,5 +126,24 @@ def test_filter_active_questions(list_of_questions):
     assert result[1] == list_of_questions[2]
 
 
+def test_set_human_datetime_old_questions(question_1):
+    question_1["new_flag"] = False
 
+    result = helpers.set_human_datetime([question_1])
+
+    assert len(result) == 1
+    assert not result[0].get("human_datetime", False)
+
+
+@pytest.mark.parametrize("creation_date, current_time, expected_result",
+                         [(1, 10, 9), (2, 2, 0), (10, 65, 55)])
+def test_set_human_datetime(question_1, creation_date: int, current_time: int, expected_result: int):
+    question_1["new_flag"] = True
+    question_1["creation_date"] = creation_date * MINUTE
+
+    with mock.patch("time.time", return_value=current_time * MINUTE):
+        result = helpers.set_human_datetime([question_1])
+
+    assert len(result) == 1
+    assert result[0]["human_datetime"] == "{} min ago".format(expected_result)
 

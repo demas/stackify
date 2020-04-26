@@ -64,6 +64,7 @@ def show_questions(params=None):
     active_questions = ActiveSession().active_questions
     active_questions = helpers.add_new_header_for_questions(active_questions)
     active_questions = helpers.fix_question_title(active_questions)
+    active_questions = helpers.set_human_datetime(active_questions)
     ui.display_list_of_questions(active_questions)
 
 
@@ -73,6 +74,7 @@ def show_new_questions(params=None):
     active_questions = ActiveSession().active_questions
     active_questions = helpers.add_new_header_for_questions(active_questions)
     active_questions = helpers.fix_question_title(active_questions)
+    active_questions = helpers.set_human_datetime(active_questions)  # todo: refactore chain of calls
     new_active_questions = helpers.filter_active_questions(active_questions)
     ActiveSession().active_questions = new_active_questions
     ui.display_list_of_questions(new_active_questions)
