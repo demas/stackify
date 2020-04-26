@@ -70,3 +70,9 @@ def fix_question_title(questions: List[Dict]) -> List[Dict]:
 def filter_active_questions(questions: List[Dict]) -> List[Dict]:
     return list(filter(lambda q: q["new_flag"], questions))
 
+
+def set_human_datetime(questions: List[Dict]) -> List[Dict]:
+    for q in questions:
+        if q["new_flag"]:
+            q["human_datetime"] = str(int((int(time.time()) - q["creation_date"]) / 60)) + " min ago"
+    return questions

@@ -11,7 +11,7 @@ import config
 URL_TEMPLATE="https://api.stackexchange.com/2.2/questions?pagesize=100&page={}&fromdate={}&order=desc&sort=creation&site={}&key={}"
 KEY = config.load_config()["stackoverflow_key"]
 
-SITES = ["stackoverflow", "codereview", "apple"]
+SITES = ["stackoverflow", "codereview", "askdifferent"]
 
 # TODO: tests
 def fetch() -> List:
