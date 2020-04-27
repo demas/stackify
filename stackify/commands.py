@@ -19,7 +19,7 @@ def get_classifier():
 
 
 def fetch_action():
-    questions = fetcher.fetch()
+    questions = fetcher.fetch(fetcher.SITES, load_config()["last-sync"])
     classified_questions = get_classifier().classify(questions)
     store.Connection().add_list(classified_questions)
     ui.alert_unclassified(classified_questions)
