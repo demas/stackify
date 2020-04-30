@@ -16,10 +16,10 @@ class DB:
         print("db loaded")
         self.db = db
 
-    def counts(self):
+    def get_counts_by_tags(self):
         return self.db.get("counts")
 
-    def tag(self, first):
+    def get_questions_by_tag(self, first):
         return self.db.get("f:" + first)
 
     def add_first(self, question: dict, dump=True):
@@ -42,16 +42,16 @@ class DB:
         if dump:
             self.db.dump()
 
-    def add(self, question: dict):
+    def add_question(self, question: dict):
         self.add_first(question)
 
-    def add_list(self, questions):
+    def add_list_of_questions(self, questions):
         print("storing data...")
         for q in questions:
             self.add_first(q, dump=False)
         self.db.dump()
 
-    def set_by_tag(self, tag: str, questions):
+    def set_list_of_questions_for_tag(self, tag: str, questions):
         self.db.set("f:" + tag, questions)
 
         if not self.db.get("counts"):
@@ -60,12 +60,12 @@ class DB:
         self.db.dadd("counts", (tag, len(questions)))
         self.db.dump()
 
-    def remove_by_tag(self, tag: str):
+    def remove_questions_for_tag(self, tag: str):
         self.db.set("f:" + tag, [])
         self.db.dadd("counts", (tag, 0))
         self.db.dump()
 
-    def new_count_by_tag(self, tag: str, seconds: int) -> int:
+    def count_new_questions_for_tag(self, tag: str, seconds: int) -> int:
         limit = int(time.time()) - seconds
-        new_questions = list(filter(lambda q: q["creation_date"] >= limit, self.tag(tag)))
+        new_questions = list(filter(lambda q: q["creation_date"] >= limit, self.get_questions_by_tag(tag)))
         return len(new_questions)

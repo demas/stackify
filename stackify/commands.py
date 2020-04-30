@@ -21,12 +21,12 @@ def get_classifier():
 def fetch_action():
     questions = fetcher.fetch(fetcher.SITES, load_config()["last-sync"])
     classified_questions = get_classifier().classify(questions)
-    store.Connection().add_list(classified_questions)
+    store.Connection().add_list_of_questions(classified_questions)
     ui.alert_unclassified(classified_questions)
 
 
 def ls_action(include_hidden=False):
-    tags = store.Connection().counts()
+    tags = store.Connection().get_counts_by_tags()
     tags = helpers.transform_tags(tags)
     if not include_hidden:
         tags = helpers.filter_tags(tags, config['hide_tags'])
@@ -60,7 +60,7 @@ def _tag_name(param: str) -> Optional[str]:
 
 def show_questions(params=None):
     tag_name = _tag_name(params)
-    ActiveSession().switch_to_tag(tag_name, store.Connection().tag(tag_name))
+    ActiveSession().switch_to_tag(tag_name, store.Connection().get_questions_by_tag(tag_name))
     active_questions = ActiveSession().active_questions
     active_questions = helpers.add_new_header_for_questions(active_questions)
     active_questions = helpers.fix_question_title(active_questions)
@@ -82,7 +82,10 @@ def show_new_questions(params=None):
 
 def delete_questions(params=None):
     if len(params) == 0:
-        store.Connection().set_by_tag(ActiveSession().last_used_tag, ActiveSession().remain_questions())
+        store.Connection().set_list_of_questions_for_tag(
+            ActiveSession().last_used_tag,
+            ActiveSession().remain_questions()
+        )
         print(fg256("grey", "delete by {} (remain={})".format(ActiveSession().last_used_tag,
                                                               len(ActiveSession().remain_questions()))))
         print()
