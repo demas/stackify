@@ -9,34 +9,34 @@ def test_add_question(testing_database: DB, question_1):
     question = question_1
     question["first"] = "js"
 
-    testing_database.add(question)
+    testing_database.add_question(question)
 
-    counts = testing_database.counts()
+    counts = testing_database.get_counts_by_tags()
     assert counts["js"] == 1
 
-    questions_by_tag = testing_database.tag("js")
+    questions_by_tag = testing_database.get_questions_by_tag("js")
     assert len(questions_by_tag) == 1
     assert questions_by_tag[0]["first"] == "js"
 
 
 def test_add_list_of_questions(testing_database: DB, list_of_classified_questions):
-    testing_database.add_list(list_of_classified_questions)
+    testing_database.add_list_of_questions(list_of_classified_questions)
 
-    counts = testing_database.counts()
+    counts = testing_database.get_counts_by_tags()
     assert counts["js"] == 3
 
-    questions_by_tag = testing_database.tag("js")
+    questions_by_tag = testing_database.get_questions_by_tag("js")
     assert len(questions_by_tag) == 3
     assert questions_by_tag[0]["first"] == "js"
 
 
 def test_set_by_tag_empty(testing_database: DB, list_of_classified_questions):
-    testing_database.set_by_tag("js", list_of_classified_questions)
+    testing_database.set_list_of_questions_for_tag("js", list_of_classified_questions)
 
-    counts = testing_database.counts()
+    counts = testing_database.get_counts_by_tags()
     assert counts["js"] == 3
 
-    questions_by_tag = testing_database.tag("js")
+    questions_by_tag = testing_database.get_questions_by_tag("js")
     assert len(questions_by_tag) == 3
     assert questions_by_tag[0]["first"] == "js"
 
@@ -45,28 +45,28 @@ def test_set_by_tag_not_empty(testing_database: DB, question_1, question_2, ques
     question_1["first"] = "js"
     question_2["first"] = "js"
     question_3["first"] = "js"
-    testing_database.add(question_1)
-    testing_database.add(question_2)
+    testing_database.add_question(question_1)
+    testing_database.add_question(question_2)
 
-    testing_database.set_by_tag("js", [question_3])
+    testing_database.set_list_of_questions_for_tag("js", [question_3])
 
-    counts = testing_database.counts()
+    counts = testing_database.get_counts_by_tags()
     assert counts["js"] == 1
 
-    questions_by_tag = testing_database.tag("js")
+    questions_by_tag = testing_database.get_questions_by_tag("js")
     assert len(questions_by_tag) == 1
     assert questions_by_tag[0] == question_3
 
 
 def test_remove_by_tag(testing_database: DB, list_of_classified_questions):
-    testing_database.set_by_tag("js", list_of_classified_questions)
+    testing_database.set_list_of_questions_for_tag("js", list_of_classified_questions)
 
-    testing_database.remove_by_tag("js")
+    testing_database.remove_questions_for_tag("js")
 
-    counts = testing_database.counts()
+    counts = testing_database.get_counts_by_tags()
     assert counts["js"] == 0
 
-    questions_by_tag = testing_database.tag("js")
+    questions_by_tag = testing_database.get_questions_by_tag("js")
     assert len(questions_by_tag) == 0
 
 
@@ -80,11 +80,11 @@ def test_get_new_count_by_tag(time, testing_database: DB, question_1, question_2
     question_1["first"] = "a"
     question_2["first"] = "a"
     question_3["first"] = "a"
-    testing_database.add(question_1)
-    testing_database.add(question_2)
-    testing_database.add(question_3)
+    testing_database.add_question(question_1)
+    testing_database.add_question(question_2)
+    testing_database.add_question(question_3)
 
-    result = testing_database.new_count_by_tag(tag="a", seconds=1)
+    result = testing_database.count_new_questions_for_tag(tag="a", seconds=1)
     assert result == 1
 
 
