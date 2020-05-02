@@ -7,7 +7,7 @@ import fetcher
 import helpers
 import ui
 import store
-from classify import Classifier, FIRST_LEVEL_RULES, STOP_TAGS
+from classify import Classifier, FIRST_LEVEL_RULES
 from config import load_config, save_config
 
 from session import ActiveSession
@@ -15,7 +15,7 @@ config = load_config()
 
 
 def get_classifier():
-    return Classifier(STOP_TAGS, FIRST_LEVEL_RULES)
+    return Classifier(config["stop_tags"], FIRST_LEVEL_RULES)
 
 
 def fetch_action():

@@ -12,6 +12,7 @@ def load_config():
     if not config_file.exists():
         default_config = {
             "hide_tags": HIDE_TAGS,
+            "stop_tags": [],
             "stackoverflow_key": "",
             "last-sync": int(time.time()),
             "timezone": 3,
