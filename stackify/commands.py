@@ -95,7 +95,7 @@ def delete_questions(params=None):
             tag_num = int(params[1:])
             for tag_dict in ActiveSession().current_tags:
                 if tag_dict["num"] == tag_num:
-                    store.Connection().remove_by_tag(tag_dict["tag"])
+                    store.Connection().remove_questions_for_tag(tag_dict["tag"])
         else:
             store.Connection().remove_by_tag(params[1:])
         print()
