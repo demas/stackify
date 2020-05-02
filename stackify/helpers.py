@@ -76,3 +76,14 @@ def set_human_datetime(questions: List[Dict]) -> List[Dict]:
         if q["new_flag"]:
             q["human_datetime"] = str(int((int(time.time()) - q["creation_date"]) / 60)) + " min ago"
     return questions
+
+
+# TODO: reduce refactoring?
+def get_tag_counts_for_questions(questions: List[Dict]) -> Dict:
+    result = {}
+    for q in questions:
+        if q["first"] in result:
+            result[q["first"]] = result[q["first"]] + 1
+        else:
+            result[q["first"]] = 1
+    return result

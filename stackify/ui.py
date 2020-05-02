@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from typing import Dict, List
 
 from fabulous.color import fg256
 
@@ -47,7 +48,14 @@ def display_list_of_questions(questions):
         num = num + 1
 
 
-def alert_unclassified(questions):
+def alert_unclassified(questions: List[Dict]):
     for q in questions:
         if q["first"] == "none":
             print(fg256('gray', "{}: {}".format(q["site"], q["tags"])))
+
+
+def summary_for_new_questions(summary: Dict):
+    print()
+    print(fg256("grey", "found new questions:"))
+    for tag, cnt in summary.items():
+        print(fg256("grey", "  {}: {}".format(tag, cnt)))
