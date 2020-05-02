@@ -22,8 +22,9 @@ def fetch_action():
     questions = fetcher.fetch(fetcher.SITES, load_config()["last-sync"])
     classified_questions = get_classifier().classify(questions)
     store.Connection().add_list_of_questions(classified_questions)
-    ui.alert_unclassified(classified_questions)
-
+    ui.alert_unclassified(classified_questions) # TODO: pass ony unclassified questions
+                                                # TODO: make option to display unclassified questions
+    ui.summary_for_new_questions(helpers.get_tag_counts_for_questions(classified_questions))
 
 def ls_action(include_hidden=False):
     tags = store.Connection().get_counts_by_tags()

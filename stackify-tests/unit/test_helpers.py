@@ -147,3 +147,14 @@ def test_set_human_datetime(question_1, creation_date: int, current_time: int, e
     assert len(result) == 1
     assert result[0]["human_datetime"] == "{} min ago".format(expected_result)
 
+
+def test_get_tag_counts_for_questions(list_of_questions):
+    list_of_questions[0]["first"] = "js"
+    list_of_questions[1]["first"] = "html"
+    list_of_questions[2]["first"] = "html"
+
+    result = helpers.get_tag_counts_for_questions(list_of_questions)
+
+    assert result["js"] == 1
+    assert result["html"] == 2
+    assert len(result.keys()) == 2
