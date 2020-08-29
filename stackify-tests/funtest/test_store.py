@@ -19,6 +19,21 @@ def test_add_question(testing_database: DB, question_1):
     assert questions_by_tag[0]["first"] == "js"
 
 
+def test_add_duplicate_question(testing_database: DB, question_1):
+    question = question_1
+    question["first"] = "js"
+
+    testing_database.add_question(question)
+    testing_database.add_question(question)
+
+    counts = testing_database.get_counts_by_tags()
+    assert counts["js"] == 1
+
+    questions_by_tag = testing_database.get_questions_by_tag("js")
+    assert len(questions_by_tag) == 1
+    assert questions_by_tag[0]["first"] == "js"
+
+
 def test_add_list_of_questions(testing_database: DB, list_of_classified_questions):
     testing_database.add_list_of_questions(list_of_classified_questions)
 

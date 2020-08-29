@@ -17,11 +17,10 @@ KEY = config.load_config()["stackoverflow_key"]
 SITES = ["stackoverflow", "codereview", "askdifferent"] # TODO: move to config
 
 
-# TODO: tests
-def fetch_one_site(site: str, from_time: int) -> Tuple[List[Dict], int, int]:
+def _fetch_one_site(site: str, from_time: int) -> Tuple[List[Dict], int, int]:
     first = True
-    json_data = None
     page = 1
+    json_data = None
     result = []
 
     while first or json_data["has_more"]:
@@ -50,7 +49,7 @@ def fetch(sites: List[str], from_time: int) -> List:
     total_pages = 0
     quota_remain = 0
     for site in sites:
-        questions, pages, quota = fetch_one_site(site=site, from_time=from_time)
+        questions, pages, quota = _fetch_one_site(site=site, from_time=from_time)
         result = result + questions
         total_pages += pages
         quota_remain = quota

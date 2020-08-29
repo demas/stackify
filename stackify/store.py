@@ -31,6 +31,11 @@ class DB:
         else:
             if not data:
                 data = []
+
+            for el in data:
+                if el['question_id'] == question['question_id']:
+                    return
+
             data.append(question)
             self.db.set(key, data)
 
