@@ -1,5 +1,6 @@
 from typing import Dict
 from typing import List
+from typing import Tuple
 
 import requests
 import json
@@ -15,8 +16,9 @@ KEY = config.load_config()["stackoverflow_key"]
 
 SITES = ["stackoverflow", "codereview", "askdifferent"] # TODO: move to config
 
+
 # TODO: tests
-def fetch_one_site(site: str, from_time: int) -> List[Dict]:
+def fetch_one_site(site: str, from_time: int) -> Tuple[List[Dict], int, int]:
     first = True
     json_data = None
     page = 1
@@ -35,9 +37,7 @@ def fetch_one_site(site: str, from_time: int) -> List[Dict]:
 
         first = False
         page = page + 1
-    print(fg256("grey", "site = {}; synced pages = {}; remain_quota = {})".format(site, page - 1,
-                                                                                  json_data["quota_remaining"])))
-    return result
+    return result, page - 1, json_data["quota_remaining"]
 
 
 # TODO: more tests
@@ -47,8 +47,14 @@ def fetch(sites: List[str], from_time: int) -> List:
     now = int(time.time())
     result = []
 
+    total_pages = 0
+    quota_remain = 0
     for site in sites:
-        result = result + fetch_one_site(site=site, from_time=from_time)
+        questions, pages, quota = fetch_one_site(site=site, from_time=from_time)
+        result = result + questions
+        total_pages += pages
+        quota_remain = quota
 
+    print(fg256("grey", "synced pages = {}; remain_quota = {})".format(total_pages, quota_remain)))
     config.set_value("last-sync", now)
     return result
