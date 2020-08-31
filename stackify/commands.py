@@ -7,6 +7,7 @@ import fetcher
 import helpers
 import ui
 import store
+import relation_store
 from classify import Classifier, FIRST_LEVEL_RULES
 from config import load_config, save_config
 
@@ -22,13 +23,18 @@ def fetch_action():
     questions = fetcher.fetch(fetcher.SITES, load_config()["last-sync"])
     classified_questions = get_classifier().classify(questions)
     store.Connection().add_list_of_questions(classified_questions)
+
+    relation_store.add_list_of_questions(relation_store.Connection(), classified_questions)
+
     ui.alert_unclassified(classified_questions) # TODO: pass ony unclassified questions
                                                 # TODO: make option to display unclassified questions
     ui.summary_for_new_questions(helpers.get_tag_counts_for_questions(classified_questions))
 
 def ls_action(include_hidden=False):
-    tags = store.Connection().get_counts_by_tags()
-    tags = helpers.transform_tags(tags)
+    #tags = store.Connection().get_counts_by_tags()
+    tags = relation_store.get_counts_by_category(relation_store.Connection())
+
+    # tags = helpers.transform_tags(tags)
     if not include_hidden:
         tags = helpers.filter_tags(tags, config['hide_tags'])
 
@@ -38,6 +44,9 @@ def ls_action(include_hidden=False):
     ActiveSession().current_tags = tags
     ui.ls(tags)
 
+
+def init():
+    relation_store.create_tables(relation_store.Connection())
 
 def fetch_and_ls():
     fetch_action()
@@ -61,7 +70,7 @@ def _tag_name(param: str) -> Optional[str]:
 
 def show_questions(params=None):
     tag_name = _tag_name(params)
-    ActiveSession().switch_to_tag(tag_name, store.Connection().get_questions_by_tag(tag_name))
+    ActiveSession().switch_to_tag(tag_name, relation_store.get_questions_by_category(relation_store.Connection(), tag_name))
     active_questions = ActiveSession().active_questions
     active_questions = helpers.add_new_header_for_questions(active_questions)
     active_questions = helpers.fix_question_title(active_questions)
@@ -83,10 +92,16 @@ def show_new_questions(params=None):
 
 def delete_questions(params=None):
     if len(params) == 0:
-        store.Connection().set_list_of_questions_for_tag(
-            ActiveSession().last_used_tag,
-            ActiveSession().remain_questions()
-        )
+
+        #store.Connection().set_list_of_questions_for_tag(
+        #    ActiveSession().last_used_tag,
+        #    ActiveSession().remain_questions()
+        #)
+
+        # TODO: optimize
+        for question in ActiveSession().active_questions:
+            relation_store.delete_question(relation_store.Connection(), question)
+
         print(fg256("grey", "delete by {} (remain={})".format(ActiveSession().last_used_tag,
                                                               len(ActiveSession().remain_questions()))))
         print()
@@ -95,9 +110,11 @@ def delete_questions(params=None):
             tag_num = int(params[1:])
             for tag_dict in ActiveSession().current_tags:
                 if tag_dict["num"] == tag_num:
-                    store.Connection().remove_questions_for_tag(tag_dict["tag"])
+                    relation_store.delete_questions_by_category(relation_store.Connection(), tag_dict["tag"])
+                    # store.Connection().remove_questions_for_tag(tag_dict["tag"])
         else:
-            store.Connection().remove_by_tag(params[1:])
+            #store.Connection().remove_by_tag(params[1:])
+            relation_store.delete_questions_by_category(relation_store.Connection(), params[1:])
         print()
 
 

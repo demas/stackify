@@ -119,5 +119,7 @@ class Classifier:
             if not self.has_stop_tag(q["tags"]):
                 q["first"] = self.first_level_classification(q["tags"], q["site"])
                 q["second"] = self.second_level_classification(q["tags"], q["first"])
+                q["category"] = q["first"]
+                q["subcategory"] = q["second"]
                 result.append(q)
         return result

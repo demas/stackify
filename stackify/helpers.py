@@ -1,5 +1,5 @@
 import time
-from typing import List, Dict
+from typing import List, Dict, Tuple
 
 from store import Connection
 
@@ -22,6 +22,7 @@ def set_hidden(tags: List[Dict[str, int]], dont_display_tags: List[str]) -> List
 
 # TODO: test for this function
 def set_new(tags: List[Dict[str, int]]) -> List[Dict[str, int]]:
+    print(tags)
     def set_in_tag(tag: Dict[str, int]) -> Dict[str, int]:
         tag["new_count"] = Connection().count_new_questions_for_tag(tag["tag"], 1 * 60 * 60)  # TODO: settings
         return tag

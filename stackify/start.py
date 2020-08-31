@@ -7,6 +7,7 @@ from cli import Parser
 
 ui.say_hello()
 parser = Parser([
+    Command(command_type=CommandType.EQUAL, value="init", action=commands.init),
     Command(command_type=CommandType.EQUAL, value="f", action=commands.fetch_and_ls),
     Command(command_type=CommandType.START_WITH, value="ls", action=commands.show_questions_by_tag),
     Command(command_type=CommandType.START_WITH, value="s ", action=commands.show_questions),

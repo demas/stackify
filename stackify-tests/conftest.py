@@ -56,3 +56,11 @@ def list_of_classified_questions(question_1, question_2, question_3):
     question_3["first"] = "js"
     question_2["first"] = "js"
     return [question_1, question_2, question_3]
+
+
+@pytest.fixture(scope="function")
+def list_of_classified_questions_with_different_categories(question_1, question_2, question_3):
+    question_1["category"] = "go"
+    question_3["category"] = "c"
+    question_2["category"] = "python"
+    return [question_1, question_2, question_3]

@@ -10,7 +10,7 @@ HOUR = 60 * SECOND
 
 
 def test_transform_tags():
-    tags = {"a": 1, "b": 2, "c": 3}
+    tags = [("a", 1), ("b", 2), ("c", 3)]
 
     result = helpers.transform_tags(tags)
 
