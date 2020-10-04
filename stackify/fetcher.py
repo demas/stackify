@@ -40,11 +40,12 @@ def _fetch_one_site(site: str, from_time: int) -> Tuple[List[Dict], int, int]:
 
 
 # TODO: more tests
-def fetch(sites: List[str], from_time: int) -> List:
+def fetch(from_time: int, sites: List[str] = None) -> List:
     print()
     print("fetching data...")
     now = int(time.time())
     result = []
+    sites = SITES if sites is None else []
 
     total_pages = 0
     quota_remain = 0

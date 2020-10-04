@@ -20,25 +20,21 @@ def get_classifier():
 
 
 def fetch_action():
-    questions = fetcher.fetch(fetcher.SITES, load_config()["last-sync"])
+    questions = fetcher.fetch(from_time=load_config()["last-sync"])
     classified_questions = get_classifier().classify(questions)
-    store.Connection().add_list_of_questions(classified_questions)
-
-    relation_store.add_list_of_questions(relation_store.Connection(), classified_questions)
-
-    ui.alert_unclassified(classified_questions) # TODO: pass ony unclassified questions
+    relation_store.add_list_of_questions(classified_questions)
+    # ui.alert_unclassified(classified_questions) # TODO: pass ony unclassified questions
                                                 # TODO: make option to display unclassified questions
-    ui.summary_for_new_questions(helpers.get_tag_counts_for_questions(classified_questions))
+    # ui.summary_for_new_questions(helpers.get_tag_counts_for_questions(classified_questions))
+
 
 def ls_action(include_hidden=False):
-    #tags = store.Connection().get_counts_by_tags()
-    tags = relation_store.get_counts_by_category(relation_store.Connection())
+    tags = relation_store.get_counts_by_category()
 
-    # tags = helpers.transform_tags(tags)
     if not include_hidden:
         tags = helpers.filter_tags(tags, config['hide_tags'])
 
-    helpers.set_hidden(tags, config['hide_tags'])
+    helpers.set_hidden(tags, config['hide_tags'])  # не помню уже зачем я это делаю
     helpers.set_new(tags)
     tags = helpers.enrich_tags(tags)
     ActiveSession().current_tags = tags
