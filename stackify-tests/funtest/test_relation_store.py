@@ -3,6 +3,7 @@ import sqlite3
 from relation_store import Connection
 from relation_store import add_list_of_questions
 from relation_store import add_question
+from relation_store import create_tables
 from relation_store import delete_question
 from relation_store import get_counts_by_category
 from relation_store import get_questions
@@ -25,6 +26,12 @@ def test_connection_singleton():
     assert id(connection1) == id(connection2)
 
 
+def test_create_tables(test_connection):
+    create_tables(test_connection)
+
+    assert len(get_questions(test_connection)) == 0
+
+
 def test_add_question(test_connection, question_1):
     q = question_1
     q["category"] = "js"
@@ -33,6 +40,8 @@ def test_add_question(test_connection, question_1):
     add_question(test_connection, question_1)
 
     result = get_questions(test_connection)
+
+    print(result)
 
     # TODO: transformation
     #expected = q
