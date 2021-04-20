@@ -16,7 +16,7 @@ pickleDB==0.9.2
 Pillow==7.1.1
 pluggy==0.13.1
 prompt-toolkit==3.0.5
-py==1.8.1
+py==1.10.0
 pyparsing==2.4.6
 pyperclip==1.8.0
 pytest==5.4.1
